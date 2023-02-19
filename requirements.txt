@@ -105,4 +105,4 @@ tzlocal==4.2
 urllib3==1.26.11
 validators==0.20.0
 #webencodings==0.5.1
-#xgboost==1.7.3
+xgboost==1.7.3
