@@ -27,8 +27,8 @@ pret_client = joblib.load('pret_client.pickle')
 preprocessed_data = joblib.load('preprocessed_data.pickle')
 model = joblib.load('model.pkl')
 
-id_list = data.index.tolist()
 column_names = preprocessed_data.columns.tolist()
+id_list = preprocessed_data.index.tolist()
 expected_value = -2.9159221699244515
 
 classifier = model.named_steps['classifier']
@@ -51,7 +51,7 @@ st.markdown(html, unsafe_allow_html=True)
 
 #Profile Client
 profile_ID = st.sidebar.selectbox('Sélectionnez un client :',
-                                  id_list)
+                                  list(preprocessed_data.index))
 API_GET = API_PRED+(str(profile_ID))
 score_client = re.get(API_GET).json()
 if score_client > 0.5:
@@ -147,7 +147,8 @@ if mode ==  'Graphiques interactifs' :
 if mode == 'Interprétabilité globale':
     st.write('Le graphique suivant indique les variables ayant le plus contribué au modèle.')
     #shap.plots.bar(dict(shap_values), max_display=40)
-    summary = shap.summary_plot(generic_shap, column_names)
+    summary = shap.summary_plot(generic_shap,
+                                column_names)
     st.pyplot(summary)
 
     st.button("Recommencer")
