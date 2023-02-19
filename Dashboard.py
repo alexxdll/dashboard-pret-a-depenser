@@ -28,7 +28,6 @@ preprocessed_data = joblib.load('preprocessed_data.pickle')
 model = joblib.load('model.pkl')
 
 column_names = preprocessed_data.columns.tolist()
-id_list = preprocessed_data.index.tolist()
 expected_value = -2.9159221699244515
 
 classifier = model.named_steps['classifier']
@@ -51,7 +50,7 @@ st.markdown(html, unsafe_allow_html=True)
 
 #Profile Client
 profile_ID = st.sidebar.selectbox('Sélectionnez un client :',
-                                  list(preprocessed_data.index))
+                                  list(data.index))
 API_GET = API_PRED+(str(profile_ID))
 score_client = re.get(API_GET).json()
 if score_client > 0.5:
