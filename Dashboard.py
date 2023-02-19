@@ -28,6 +28,10 @@ pret_client = joblib.load('pret_client.pickle')
 preprocessed_data = joblib.load('preprocessed_data.pickle')
 model = joblib.load('model.pkl')
 
+for ind1,ind2 in zip(list_ID,data.index.tolist()):
+    if ind1 != ind2:
+        st.write('problème',ind1,ind2)
+
 column_names = preprocessed_data.columns.tolist()
 expected_value = -2.9159221699244515
 
@@ -82,13 +86,13 @@ fig_jauge.update_layout(height=250, width=305,
                         margin=dict(l=0, r=0, b=0, t=0, pad=2))
 
 st.sidebar.plotly_chart(fig_jauge)
-if 0 <= score_client < .25:
+if 0 <= score_client < 25:
     score_text = 'Crédit score : EXCELLENT'
     st.sidebar.success(score_text)
-elif .25 <= score_client < .50:
+elif 25 <= score_client < 50:
     score_text = 'Crédit score : BON'
     st.sidebar.success(score_text)
-elif .50 <= score_client < .75:
+elif 50 <= score_client < 75:
     score_text = 'Crédit score : MOYEN'
     st.sidebar.warning(score_text)
 else :
