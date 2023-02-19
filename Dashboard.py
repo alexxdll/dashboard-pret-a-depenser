@@ -4,36 +4,23 @@
 
 import streamlit as st
 import joblib
-import pickle
 import plotly.graph_objects as go
-st.set_option('deprecation.showPyplotGlobalUse', False)
-import matplotlib
-import matplotlib_inline
-import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
-import seaborn as sns
-
-import shap
-import json
-import requests as re
-import datetime
-import numpy as np
-import pandas as pd
 import plotly.express as px
-from PIL import Image
-from pathlib import Path
-import os
+st.set_option('deprecation.showPyplotGlobalUse', False)
+import shap
+import requests as re
+import numpy as np
+
 
 #---------------------#
 # VARIABLES STATIQUES #
 #---------------------#
 
-API_URL = "https://api-creditscore.herokuapp.com"
-API_PRED = "http://127.0.0.1:8000/predict/"
-API_SHAP = "http://127.0.0.1:8000/shap_client/"
-API_SHAP_G = "http://127.0.0.1:8000/generic_shap"
+API_PRED = "https://api-creditscore.herokuapp.com/predict/"
+API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
+#API_PRED = "http://127.0.0.1:8000/predict/"
+#API_SHAP = "http://127.0.0.1:8000/shap_client/"
 
-#shap_values = re.get(API_SHAP_G).json()[0]
 data = joblib.load('sample_test_set.pickle')
 infos_client = joblib.load('infos_client.pickle')
 pret_client = joblib.load('pret_client.pickle')
@@ -48,9 +35,6 @@ classifier = model.named_steps['classifier']
 df_preprocess = model.named_steps['preprocessor'].transform(data)
 explainer = shap.TreeExplainer(classifier)
 generic_shap = explainer.shap_values(df_preprocess, check_additivity=False)
-
-
-#shap_g = np.array(shap_g[1:-1].split(',')).astype('float32')
 
 html="""           
     <h1 style="font-size:300%; color:DarkSlateGrey; font-family:Soleil"> Prêt à dépenser <br>
