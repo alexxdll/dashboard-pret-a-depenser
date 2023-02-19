@@ -22,6 +22,7 @@ API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
 #API_SHAP = "http://127.0.0.1:8000/shap_client/"
 
 data = joblib.load('sample_test_set.pickle')
+list_ID = joblib.load('list_ID.pickle')
 infos_client = joblib.load('infos_client.pickle')
 pret_client = joblib.load('pret_client.pickle')
 preprocessed_data = joblib.load('preprocessed_data.pickle')
@@ -50,7 +51,7 @@ st.markdown(html, unsafe_allow_html=True)
 
 #Profile Client
 profile_ID = st.sidebar.selectbox('Sélectionnez un client :',
-                                  list(data.index))
+                                  list_ID)
 API_GET = API_PRED+(str(profile_ID))
 score_client = re.get(API_GET).json()
 if score_client > 0.5:
