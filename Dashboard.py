@@ -58,7 +58,7 @@ profile_ID = st.sidebar.selectbox('Sélectionnez un client :',
                                   list_ID)
 API_GET = API_PRED+(str(profile_ID))
 score_client = int(re.get(API_GET).json()*100)
-if score_client > 0.5:
+if score_client > 10:
     st.sidebar.write("Le prêt n'est pas octroyé.")
 else:
     st.sidebar.write("Le prêt est octroyé.")
