@@ -58,7 +58,7 @@ profile_ID = st.sidebar.selectbox('Sélectionnez un client :',
                                   list_ID)
 API_GET = API_PRED+(str(profile_ID))
 score_client = int(re.get(API_GET).json()*100)
-if score_client > 10:
+if score_client > 10.344827586206896:
     st.sidebar.write("Le prêt n'est pas octroyé.")
 else:
     st.sidebar.write("Le prêt est octroyé.")
@@ -72,27 +72,27 @@ fig_jauge = go.Figure(go.Indicator(
                                       'tickwidth': 3,
                                       'tickcolor': 'black'},
                              'bar': {'color': 'white', 'thickness': 0.25},
-                             'steps': [{'range': [0, 25], 'color': 'Green'},
-                                       {'range': [25, 49.49], 'color': 'LimeGreen'},
-                                       {'range': [49.5, 50.5], 'color': 'red'},
-                                       {'range': [50.51, 75], 'color': 'Orange'},
-                                       {'range': [75, 100], 'color': 'Crimson'}],
-                             'threshold': {'line': {'color': 'white', 'width': 10},
-                                           'thickness': 0.5,
-                                           'value': np.median(score_client).astype('float')}}))
+                             'steps': [{'range': [0, 5], 'color': 'Green'},
+                                       {'range': [5, 10], 'color': 'LimeGreen'},
+                                       {'range': [10, 30], 'color': 'red'},
+                                       {'range': [30, 50], 'color': 'Orange'},
+                                       {'range': [50, 100], 'color': 'Crimson'}],
+                             'threshold': {'line': {'color': 'red', 'width': 10},
+                                           'thickness': 0.7,
+                                           'value': 10.344827586206896}}))
 
 fig_jauge.update_layout(height=250, width=305,
                         font={'color': 'black', 'family': 'Sofia Pro'},
                         margin=dict(l=0, r=0, b=0, t=0, pad=2))
 
 st.sidebar.plotly_chart(fig_jauge)
-if 0 <= score_client < 25:
+if 0 <= score_client < 5:
     score_text = 'Crédit score : EXCELLENT'
     st.sidebar.success(score_text)
-elif 25 <= score_client < 50:
+elif 5 <= score_client < 10:
     score_text = 'Crédit score : BON'
     st.sidebar.success(score_text)
-elif 50 <= score_client < 75:
+elif 10 <= score_client < 30:
     score_text = 'Crédit score : MOYEN'
     st.sidebar.warning(score_text)
 else :
