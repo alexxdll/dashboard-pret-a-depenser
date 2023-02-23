@@ -17,10 +17,10 @@ import numpy as np
 # VARIABLES STATIQUES #
 #---------------------#
 
-#API_PRED = "https://api-creditscore.herokuapp.com/predict/"
-#API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
-API_PRED = "http://127.0.0.1:8000/predict/"
-API_SHAP = "http://127.0.0.1:8000/shap_client/"
+API_PRED = "https://api-creditscore.herokuapp.com/predict/"
+API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
+#API_PRED = "http://127.0.0.1:8000/predict/"
+#API_SHAP = "http://127.0.0.1:8000/shap_client/"
 
 data = joblib.load('sample_test_set.pickle')
 infos_client = joblib.load('infos_client.pickle')
