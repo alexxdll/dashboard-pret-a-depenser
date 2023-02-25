@@ -17,15 +17,16 @@ import numpy as np
 # VARIABLES STATIQUES #
 #---------------------#
 
-#API_PRED = "https://api-creditscore.herokuapp.com/predict/"
-#API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
-API_PRED = "http://127.0.0.1:8000/predict/"
-API_SHAP = "http://127.0.0.1:8000/shap_client/"
+API_PRED = "https://api-creditscore.herokuapp.com/predict/"
+API_SHAP = "https://api-creditscore.herokuapp.com/shap_client/"
+#API_PRED = "http://127.0.0.1:8000/predict/"
+#API_SHAP = "http://127.0.0.1:8000/shap_client/"
 
 data = joblib.load('sample_test_set.pickle')
 infos_client = joblib.load('infos_client.pickle')
 pret_client = joblib.load('pret_client.pickle')
 model = joblib.load('model.pkl')
+preprocessed_data = joblib.load('preprocessed_data.pickle')
 
 column_names = preprocessed_data.columns.tolist()
 expected_value = -2.9159221699244515
